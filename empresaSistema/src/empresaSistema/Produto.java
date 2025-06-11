@@ -6,10 +6,11 @@ public class Produto {
 public static Scanner input = new Scanner(System.in);
 
 public static int codigoCelular = 46, codigoTablet = 32, codigoNotebook = 54,
-quantidadeCelular, quantidadeTablet, quantidadeNotebook, escolha;
+quantidadeCelular, quantidadeTablet, quantidadeNotebook;
 public static double precoCelular = 290, precoTablet = 400, precoNotebook = 1290;
 	// Rodou é usado para checar se certa parte do código já foi usada
-public static boolean rodou = false;
+private static boolean rodou = false;
+private static int escolha, codigoEscolhido;
 
 	public static void verProdutos() {
 		System.out.println("Produtos em estoque: "
@@ -18,8 +19,9 @@ public static boolean rodou = false;
 				+ "\n Nome: Notebook | Preço: R$ 1290,00 | Código: 54");
 		
 		System.out.println("\n O que deseja fazer? \n [1] Comprar | [0] Voltar");
-		int escolha = input.nextInt();
-		
+		try {
+		escolha = input.nextInt();
+		} catch (Exception e) {}
 		switch(escolha) {
 		case 0:
 			Main.main(null);
@@ -42,7 +44,12 @@ public static boolean rodou = false;
 			
 			if (rodou == true) {
 				System.out.println("Deseja parar de comprar? [0] Sim | [Qualquer valor] Não");
+				try {
 				escolha = input.nextInt();
+				} catch (Exception e) {
+					System.out.println("Valor inválido.");
+					Main.main(null);
+				}
 			}
 			rodou = true;
 
@@ -59,7 +66,9 @@ public static boolean rodou = false;
 			}
 			
 			System.out.println("Insira o código do produto que deseja adicionar ao carrinho");
-			int codigoEscolhido = input.nextInt();
+			try {
+			codigoEscolhido = input.nextInt();
+			} catch (Exception e) {}
 			switch (codigoEscolhido) {
 			case 46:
 				quantidadeCelular ++;

@@ -10,6 +10,7 @@ public static Scanner input = new Scanner(System.in);
 public static String [] usuarioNome = new String[255], usuarioEmail = new String[255], 
 usuarioCep = new String[255], cpf = new String[255], cnpj = new String[255];
 public static int usuarios = 0;
+private static String escolha;
 
 	public static void cadastrarCliente() {
 		
@@ -45,13 +46,18 @@ public static int usuarios = 0;
 					&& consultarCPF.equalsIgnoreCase(cpf[i])) {
 				
 				System.out.println("O que deseja fazer? \n [1] Ver produtos | [0] Voltar");
-				int escolha = input.nextInt();
+				
+				try {
+				escolha = input.nextLine();
+				} catch (Exception e) {
+					System.out.println("Insira um valor válido.");
+				}
 				
 				switch (escolha) {
-				case 0:
-					Main.main(null);
+				case "0":
+					Main.entrar();
 					break;
-				case 1:
+				case "1":
 					Produto.verProdutos();
 					break;
 					default:

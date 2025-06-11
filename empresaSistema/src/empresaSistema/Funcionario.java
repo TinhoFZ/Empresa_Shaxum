@@ -13,6 +13,7 @@ public static int [] diasTrabalhados = new int[255];
 public static boolean [] folga = new boolean[255];
 // funcionarioAtual serve para saber qual usuário está logado atualmente
 public static int funcionarios = 0, funcionarioAtual;
+private static String escolha;
 
 	public static void cadastrarFuncionario() {
 		
@@ -28,12 +29,17 @@ public static int funcionarios = 0, funcionarioAtual;
 		System.out.println("Insira seu cargo");
 		cargo[funcionarios] = input.nextLine();
 		
-		System.out.println("Insira seu salário");
-		salario[funcionarios] = input.nextDouble();
-
-		System.out.println("Insira a quantidade de dias trabalhados (de 1 a 30)");
-		diasTrabalhados[funcionarios] = input.nextInt();
-		input.nextLine();
+		try {
+			System.out.println("Insira seu salário");
+			salario[funcionarios] = input.nextDouble();
+	
+			System.out.println("Insira a quantidade de dias trabalhados (de 1 a 30)");
+			diasTrabalhados[funcionarios] = input.nextInt();
+			input.nextLine();
+		} catch (Exception e) {
+			System.out.println("Insira um valor válido.");
+			Main.main(null);
+		}
 		
 		if (diasTrabalhados[funcionarios] == 30) {
 			folga[funcionarios] = true;
@@ -62,15 +68,16 @@ public static int funcionarios = 0, funcionarioAtual;
 		for (int i = 0; i < funcionarios; i ++) {
 			if (consultarNome.equalsIgnoreCase(funcionarioNome[i]) && consultarEmail.equalsIgnoreCase(funcionarioEmail[i])
 					&& consultarCEP.equalsIgnoreCase(funcionarioCep[i])) {	
+				
 				funcionarioAtual = i;
 				System.out.println("O que deseja fazer? \n [1] Ver salario | [0] Voltar");
-				int escolha = input.nextInt();
+				escolha = input.nextLine();
 				
 				switch (escolha) {
-				case 0:
-					Main.main(null);
+				case "0":
+					Main.entrar();
 					break;
-				case 1:
+				case "1":
 					Salario.verSalario();
 					break;
 					default:
